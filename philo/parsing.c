@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:50:55 by plang             #+#    #+#             */
-/*   Updated: 2024/06/21 10:22:43 by plang            ###   ########.fr       */
+/*   Updated: 2024/06/24 10:57:21 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,20 @@ int input_check(char **arguments)
     }
     while(arguments[i])
     {
+        check_nbr = ft_atoi(arguments[i]);
+        if (check_nbr <= 0)
+        {
+            write(2, "Only digits and positive values!\n", 33);
+            return (1);
+        }
         while (arguments[i][j] != '\0')
         {
             if (!ft_isdigit(arguments[i][j]))
             {
-                write(2, "The arguments are not digits!\n", 31);
+                write(2, "Only digits and positive values!\n", 33);
                 return (1);
             }
             j++;
-        }
-        check_nbr = ft_atoi(arguments[i]);
-        if (check_nbr <= 0)
-        {
-            write(2, "The arguments need to be above zero!\n", 37);
-            return (1);
         }
         j = 0;
         i++;

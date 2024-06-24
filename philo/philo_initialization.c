@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initialization.c                                   :+:      :+:    :+:   */
+/*   philo_initialization.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plang <plang@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 09:06:58 by plang             #+#    #+#             */
-/*   Updated: 2024/06/21 10:14:54 by plang            ###   ########.fr       */
+/*   Updated: 2024/06/24 15:54:49 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,17 @@ int data_initialization(int argc, char **args, t_data *data)
     printf("sleep: %ld\n", data->time_to_sleep);
     printf("meals: %d\n", data->meal_count);
     return (0);
+}
+
+int philo_initialization(t_data *data, t_philo *philo)
+{
+    int i;
+
+    i = 0;
+    while (i > data->philo_count)
+    {
+        philo[i].id = i + 1;
+        
+        i++;
+    }
 }
