@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   philo_utils1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plang <plang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 07:56:42 by plang             #+#    #+#             */
-/*   Updated: 2024/06/21 10:07:06 by plang            ###   ########.fr       */
+/*   Updated: 2024/06/25 17:15:59 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-// size_t	get_time_ms(void)
-// {
-// 	struct timeval	time;
+size_t	get_current_time(void)
+{
+	struct timeval	time;
 
-// 	if (gettimeofday(&time, NULL) == -1)
-// 		write(2, "Error, gettimeofday()\n", 22);
-// 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
-// }
+	if (gettimeofday(&time, NULL) == -1)
+		write(2, "Error, gettimeofday()\n", 22);
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
+}
 
 // void	ft_usleep(size_t time_ms)
 // {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plang <plang@student.42.fr>                +#+  +:+       +#+        */
+/*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:36:48 by plang             #+#    #+#             */
-/*   Updated: 2024/06/24 16:46:54 by plang            ###   ########.fr       */
+/*   Updated: 2024/06/25 17:15:56 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct  s_data
     size_t          time_to_eat; // convert to ms
     size_t          time_to_sleep; // convert to ms
     int             meal_count; //if (argc == 6) else = -1
+    int             murder;
     pthread_mutex_t dead_lock;
     pthread_mutex_t write_lock;
 }   t_data;
@@ -44,14 +45,11 @@ typedef struct  s_philo
     t_data              *data;
 }   t_philo;
 
-int ft_atoi(const char *str);
-int ft_isdigit(int c);
-int input_check(char **arguments);
-int data_initialization(int argc, char **args, t_data *data);
-int philo_initialization(t_data *data, t_philo *philo);
-
-
-// left_fork;
-// right_fork;
+int     ft_atoi(const char *str);
+int     ft_isdigit(int c);
+int     input_check(int argc, char **input);
+int     data_initialization(int argc, char **args, t_data *data);
+int     philo_initialization(t_data *data, t_philo *philo);
+size_t	get_current_time(void);
 
 #endif
