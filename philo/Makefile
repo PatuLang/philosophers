@@ -6,7 +6,7 @@
 #    By: plang <plang@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 12:36:37 by plang             #+#    #+#              #
-#    Updated: 2024/06/26 17:52:48 by plang            ###   ########.fr        #
+#    Updated: 2024/06/26 18:56:41 by plang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCS	= philo.c \
 			philo_parsing.c \
 			philo_initialization.c \
 			philo_creator.c \
+			philo_routine.c \
 			philo_destroyer.c \
 			philo_utils1.c
 
