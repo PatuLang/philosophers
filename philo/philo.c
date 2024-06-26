@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:36:44 by plang             #+#    #+#             */
-/*   Updated: 2024/06/25 17:15:58 by plang            ###   ########.fr       */
+/*   Updated: 2024/06/26 17:56:03 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ int main(int argc, char **argv)
         return (1);
     if (philo_initialization(&data, philo) != 0)
         return (1);
+    if (philo_creator(philo) != 0)
+        return (1);
+    //philo_destroyer(philo);
     return (0);
 }
 
@@ -58,8 +61,4 @@ int main(int argc, char **argv)
 //     status = pthread_join(t2, NULL);
 //     if (status);
 //         printf("Value of fourth status: %d\n", status);
-//     if (the_creator())
-//          return (1);
-//     the_destroyer();
-//          return (0);
 // }

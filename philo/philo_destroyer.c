@@ -6,15 +6,20 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 17:09:01 by plang             #+#    #+#             */
-/*   Updated: 2024/06/25 17:51:46 by plang            ###   ########.fr       */
+/*   Updated: 2024/06/26 17:52:25 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int initialization_mutex_error(char *str, int i, t_philo *philo)
+int init_mutex_error(char *str, int i, t_philo *philo)
 {
-    write(2, "Mutex error\n", 12);
+    while (*str)
+    {
+        write(2, &str, 1);
+        str++;
+    }
+    write(2, "\n", 1);
     if (i != 0)
     {
         while (i > 0)
@@ -30,5 +35,20 @@ int initialization_mutex_error(char *str, int i, t_philo *philo)
         pthread_mutex_destroy(&philo->data->write_lock);
     if (&philo->data->dead_lock)
         pthread_mutex_destroy(&philo->data->dead_lock);
+    return (1);
+}
+
+int data_mutex_error(char *str, t_data *data)
+{
+    while (*str)
+    {
+        write(2, &str, 1);
+        str++;
+    }
+    write(2, "\n", 1);
+    if (&data->write_lock)
+        pthread_mutex_destroy(&data->write_lock);
+    if (&data->dead_lock)
+        pthread_mutex_destroy(&data->dead_lock);
     return (1);
 }

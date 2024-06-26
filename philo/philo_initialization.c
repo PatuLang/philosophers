@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 09:06:58 by plang             #+#    #+#             */
-/*   Updated: 2024/06/25 17:39:15 by plang            ###   ########.fr       */
+/*   Updated: 2024/06/26 17:51:25 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int data_initialization(int argc, char **args, t_data *data)
     else
         data->meal_count = ft_atoi(args[5]);
     if (pthread_mutex_init(&data->write_lock, NULL) !=  0)
-        return (write(2, "Mutex error\n", 12), 1);
+        return (data_mutex_error("Write lock mutex error", data));
     if (pthread_mutex_init(&data->dead_lock, NULL) !=  0)
-        return (write(2, "Mutex error\n", 12), 1);
+        return (data_mutex_error("Dead lock mutex error", data));
     data->murder = 0;
     return (0);
 }
@@ -42,17 +42,15 @@ int philo_initialization(t_data *data, t_philo *philo)
         philo[i].last_meal = 0;
         philo[i].meals_eaten = 0;
         if (pthread_mutex_init(&philo[i].right_fork, NULL) !=  0)
-            return (write(2, "Mutex error\n", 12), 1);
+            return (init_mutex_error("Fork mutex error", i, philo));
         if (pthread_mutex_init(&philo[i].eating, NULL) !=  0)
-            return (write(2, "Mutex error\n", 12), 1);
+            return (init_mutex_error("Eating mutex error", i, philo));
         if (i == 0)
             philo[i].left_fork = &philo[data->philo_count - 1].right_fork;
         else
             philo[i].left_fork = &philo[i - 1].right_fork;
+        philo[i].data = data;
         i++;
     }
     return (0);
 }
-
-// write error function that takes the error string and then returns 1!
-// and destroys mutexes!

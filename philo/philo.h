@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:36:48 by plang             #+#    #+#             */
-/*   Updated: 2024/06/25 17:15:56 by plang            ###   ########.fr       */
+/*   Updated: 2024/06/26 17:51:59 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ int     ft_isdigit(int c);
 int     input_check(int argc, char **input);
 int     data_initialization(int argc, char **args, t_data *data);
 int     philo_initialization(t_data *data, t_philo *philo);
+int     init_mutex_error(char *str, int i, t_philo *philo);
+int     data_mutex_error(char *str, t_data *data);
 size_t	get_current_time(void);
+int     philo_creator(t_philo *philo);
 
 #endif
