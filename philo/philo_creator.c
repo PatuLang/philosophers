@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:08:00 by plang             #+#    #+#             */
-/*   Updated: 2024/06/26 19:19:22 by plang            ###   ########.fr       */
+/*   Updated: 2024/06/27 13:34:54 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int philo_creator(t_philo *philo)
 
     i = 0;
     printf("Philo count in create: %d\n", philo->data->philo_count);
-    if (pthread_create(&monitor, NULL, &monitor_routine, philo->data) != 0)
+    if (pthread_create(&monitor, NULL, &monitor_routine, philo) != 0)
         return (write(2, "create error\n", 13), 1);
     while (i < philo->data->philo_count)
     {
