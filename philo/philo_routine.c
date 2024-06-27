@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 18:52:08 by plang             #+#    #+#             */
-/*   Updated: 2024/06/27 17:21:29 by plang            ###   ########.fr       */
+/*   Updated: 2024/06/27 20:15:40 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void    *philo_routine(void* arg)
     // eat
     // sleep
     // think
+    //mutexes
 }
 void    *monitor_routine(void* arg)
 {
