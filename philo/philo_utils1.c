@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 07:56:42 by plang             #+#    #+#             */
-/*   Updated: 2024/06/25 17:15:59 by plang            ###   ########.fr       */
+/*   Updated: 2024/06/28 18:05:42 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,24 @@ size_t	get_current_time(void)
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
-// void	ft_usleep(size_t time_ms)
-// {
-// 	size_t	start;
+void	ft_usleep(size_t time_ms)
+{
+	size_t	start;
 
-// 	start = get_time_ms();
-// 	while ((get_time_ms() - start) < time_ms)
-// 		usleep(500);
-// }
+	start = get_current_time();
+	while ((get_current_time() - start) < time_ms)
+		usleep(500);
+}
+
+void	philo_actions(t_philo *philo, char *str)
+{
+	size_t	time;
+
+	pthread_mutex_lock(&philo->data->write_lock);
+	time = get_current_time() - philo->start_time;
+	printf("%lu %d %s", time, philo->id, str);
+	pthread_mutex_unlock(&philo->data->write_lock);
+}
 
 static	int	ft_conversion(const char *str, int negative, long result, long prev)
 {

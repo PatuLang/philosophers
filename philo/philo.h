@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:36:48 by plang             #+#    #+#             */
-/*   Updated: 2024/06/27 13:45:15 by plang            ###   ########.fr       */
+/*   Updated: 2024/06/28 18:06:17 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,10 @@ int     philo_initialization(t_data *data, t_philo *philo);
 int     init_mutex_error(char *str, int i, t_philo *philo);
 int     data_mutex_error(char *str, t_data *data);
 size_t	get_current_time(void);
+void	ft_usleep(size_t time_ms);
 int     philo_creator(t_philo *philo);
 void    *philo_routine(void *arg);
 void    *monitor_routine(void *arg);
+void	philo_actions(t_philo *philo, char *str);
 
 #endif
