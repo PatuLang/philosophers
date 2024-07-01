@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 09:06:58 by plang             #+#    #+#             */
-/*   Updated: 2024/06/28 18:12:40 by plang            ###   ########.fr       */
+/*   Updated: 2024/07/01 18:43:15 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,16 @@ int data_initialization(int argc, char **args, t_data *data)
 
 int philo_initialization(t_data *data, t_philo *philo)
 {
-    int i;
+    int     i;
+    size_t  time;
 
     i = 0;
+    time = get_current_time();
     while (i < data->philo_count)
     {
         philo[i].id = i + 1;
-        philo[i].start_time = get_current_time();
-        philo[i].last_meal = 0;
+        philo[i].start_time = time;
+        philo[i].last_meal = time;
         philo[i].meals_eaten = 0;
         if (pthread_mutex_init(&philo[i].right_fork, NULL) !=  0)
             return (init_mutex_error("Fork mutex error", i, philo));
