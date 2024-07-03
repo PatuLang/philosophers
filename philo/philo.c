@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:36:44 by plang             #+#    #+#             */
-/*   Updated: 2024/07/01 19:30:26 by plang            ###   ########.fr       */
+/*   Updated: 2024/07/03 12:22:47 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ int main(int argc, char **argv)
     
     if (argc < 5 || argc > 6)
     {
-        write(2, "Not the correct amount of arguments\n", 36);
-        return (1);
+        return(write(2, "Not the correct amount of arguments\n", 36));
     }
     if (input_check(argc, argv) != 0)
         return (1);

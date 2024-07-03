@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 17:09:01 by plang             #+#    #+#             */
-/*   Updated: 2024/07/01 19:35:18 by plang            ###   ########.fr       */
+/*   Updated: 2024/07/03 12:24:00 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 
 int init_mutex_error(char *str, int i, t_philo *philo)
 {
-    while (*str)
-    {
-        write(2, &str, 1);
-        str++;
-    }
-    write(2, "\n", 1);
+    // while (*str)
+    // {
+    //     write(2, &str, 1);
+    //     str++;
+    // }
+    // write(2, "\n", 1);
+    printf("%s\n", str);
     if (i != 0)
     {
         while (i > 0)
@@ -40,12 +41,13 @@ int init_mutex_error(char *str, int i, t_philo *philo)
 
 int data_mutex_error(char *str, t_data *data)
 {
-    while (*str)
-    {
-        write(2, &str, 1);
-        str++;
-    }
-    write(2, "\n", 1);
+    // while (*str)
+    // {
+    //     write(2, &str, 1);
+    //     str++;
+    // }
+    // write(2, "\n", 1);
+    printf("%s\n", str);
     if (&data->write_lock)
         pthread_mutex_destroy(&data->write_lock);
     if (&data->dead_lock)

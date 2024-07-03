@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 07:56:42 by plang             #+#    #+#             */
-/*   Updated: 2024/06/28 18:05:42 by plang            ###   ########.fr       */
+/*   Updated: 2024/07/03 18:52:48 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	get_current_time(void)
 	struct timeval	time;
 
 	if (gettimeofday(&time, NULL) == -1)
-		write(2, "Error, gettimeofday()\n", 22);
+		printf("Error gettimeofday()\n");// write(2, "Error, gettimeofday()\n", 22);
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
@@ -38,6 +38,18 @@ void	philo_actions(t_philo *philo, char *str)
 	time = get_current_time() - philo->start_time;
 	printf("%lu %d %s", time, philo->id, str);
 	pthread_mutex_unlock(&philo->data->write_lock);
+}
+
+int	philos_are_full(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->eating);
+	if (philo->meals_eaten == philo->data->meal_count)
+	{
+		pthread_mutex_unlock(&philo->eating);
+		return (1);
+	}
+	pthread_mutex_unlock(&philo->eating);
+	return (0);
 }
 
 static	int	ft_conversion(const char *str, int negative, long result, long prev)

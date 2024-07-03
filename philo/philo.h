@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:36:48 by plang             #+#    #+#             */
-/*   Updated: 2024/07/01 18:43:02 by plang            ###   ########.fr       */
+/*   Updated: 2024/07/03 12:04:48 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,7 @@ int     philo_creator(t_philo *philo);
 void    *philo_routine(void *arg);
 void    *monitor_routine(void *arg);
 void	philo_actions(t_philo *philo, char *str);
+int     philos_are_full(t_philo *philo);
+int     philo_annhilator(t_philo *philo);
 
 #endif

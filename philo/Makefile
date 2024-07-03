@@ -6,7 +6,7 @@
 #    By: plang <plang@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/19 12:36:37 by plang             #+#    #+#              #
-#    Updated: 2024/06/26 18:56:41 by plang            ###   ########.fr        #
+#    Updated: 2024/07/03 19:47:45 by plang            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME	= philo
 
 CC		= @cc
 
-CFLAGS	= -Wall -Werror -Wextra
+CFLAGS	= -Wall -Werror -Wextra #-Ofast
 
 SRCS	= philo.c \
 			philo_parsing.c \

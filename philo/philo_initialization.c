@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 09:06:58 by plang             #+#    #+#             */
-/*   Updated: 2024/07/01 18:43:15 by plang            ###   ########.fr       */
+/*   Updated: 2024/07/03 20:02:31 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int philo_initialization(t_data *data, t_philo *philo)
     {
         philo[i].id = i + 1;
         philo[i].start_time = time;
-        philo[i].last_meal = time;
+        philo[i].last_meal = philo[i].start_time;
         philo[i].meals_eaten = 0;
         if (pthread_mutex_init(&philo[i].right_fork, NULL) !=  0)
             return (init_mutex_error("Fork mutex error", i, philo));
