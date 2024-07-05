@@ -6,34 +6,35 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:36:44 by plang             #+#    #+#             */
-/*   Updated: 2024/07/03 12:22:47 by plang            ###   ########.fr       */
+/*   Updated: 2024/07/05 19:01:33 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-    t_data  data;
-    t_philo philo[200];
-    
-    
-    if (argc < 5 || argc > 6)
-    {
-        return(write(2, "Not the correct amount of arguments\n", 36));
-    }
-    if (input_check(argc, argv) != 0)
-        return (1);
-    if (data_initialization(argc, argv, &data) != 0)
-        return (1);
-    if (philo_initialization(&data, philo) != 0)
-        return (1);
-    if (philo_creator(philo) != 0)
-        return (1);
-    philo_annhilator(philo);
-    return (0);
-}
+	t_data	data;
+	t_philo	*philo;
 
+	if (argc < 5 || argc > 6)
+	{
+		return (write(2, "Not the correct amount of arguments\n", 36));
+	}
+	if (input_check(argc, argv) != 0)
+		return (1);
+	if (data_initialization(argc, argv, &data) != 0)
+		return (1);
+	philo = malloc(data.philo_count * sizeof(t_philo));
+	if (!philo)
+		return (philo_annhilator(philo));
+	if (philo_initialization(&data, philo) != 0)
+		return (1);
+	if (philo_creator(philo) != 0)
+		return (1);
+	philo_annhilator(philo);
+	return (0);
+}
 
 // void    *thread_says_hello()
 // {

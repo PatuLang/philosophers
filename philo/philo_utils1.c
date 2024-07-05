@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 07:56:42 by plang             #+#    #+#             */
-/*   Updated: 2024/07/03 18:52:48 by plang            ###   ########.fr       */
+/*   Updated: 2024/07/05 19:15:41 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	get_current_time(void)
 	struct timeval	time;
 
 	if (gettimeofday(&time, NULL) == -1)
-		printf("Error gettimeofday()\n");// write(2, "Error, gettimeofday()\n", 22);
+		printf("Error gettimeofday()\n");
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
@@ -90,7 +90,6 @@ int	ft_atoi(const char *str)
 	return (ft_conversion(str, negative, result, prev));
 }
 
-
 int	ft_isdigit(int c)
 {
 	if (c >= '0' && c <= '9')
@@ -98,4 +97,3 @@ int	ft_isdigit(int c)
 	else
 		return (0);
 }
-
