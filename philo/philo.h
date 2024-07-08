@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:36:48 by plang             #+#    #+#             */
-/*   Updated: 2024/07/05 18:59:36 by plang            ###   ########.fr       */
+/*   Updated: 2024/07/08 15:12:05 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_philo
 	size_t				last_meal;
 	int					meals_eaten;
 	int					all_done;
+	int					i_died;
 	pthread_mutex_t		right_fork;
 	pthread_mutex_t		*left_fork;
 	pthread_mutex_t		eating;
@@ -48,6 +49,8 @@ typedef struct s_philo
 
 int		ft_atoi(const char *str);
 int		ft_isdigit(int c);
+void	ft_putstr_fd(char *s, int fd);
+int		input_error(char *str);
 int		input_check(int argc, char **input);
 int		data_initialization(int argc, char **args, t_data *data);
 int		philo_initialization(t_data *data, t_philo *philo);
@@ -61,5 +64,7 @@ void	*monitor_routine(void *arg);
 void	philo_actions(t_philo *philo, char *str);
 int		philos_are_full(t_philo *philo);
 int		philo_annhilator(t_philo *philo);
+void	free_philos(t_philo *philo);
+void	philo_has_died(t_philo *philo, char *str);
 
 #endif

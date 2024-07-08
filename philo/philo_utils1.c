@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 07:56:42 by plang             #+#    #+#             */
-/*   Updated: 2024/07/05 19:15:41 by plang            ###   ########.fr       */
+/*   Updated: 2024/07/08 15:11:18 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,16 @@ void	philo_actions(t_philo *philo, char *str)
 	time = get_current_time() - philo->start_time;
 	printf("%lu %d %s", time, philo->id, str);
 	pthread_mutex_unlock(&philo->data->write_lock);
+}
+
+void	philo_has_died(t_philo *philo, char *str)
+{
+	size_t	time;
+
+	pthread_mutex_lock(&philo->data->write_lock);
+	time = get_current_time() - philo->start_time;
+	printf("%lu %d %s", time, philo->id, str);
+	// pthread_mutex_unlock(&philo->data->write_lock);
 }
 
 int	philos_are_full(t_philo *philo)
@@ -96,4 +106,18 @@ int	ft_isdigit(int c)
 		return (1);
 	else
 		return (0);
+}
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	int	i;
+
+	i = 0;
+	if (s == 0)
+		return ;
+	while (s[i] != '\0')
+	{
+		write (fd, &s[i], 1);
+		i++;
+	}
 }

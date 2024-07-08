@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:08:00 by plang             #+#    #+#             */
-/*   Updated: 2024/07/05 19:07:37 by plang            ###   ########.fr       */
+/*   Updated: 2024/07/08 14:19:25 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,15 @@ int	philo_creator(t_philo *philo)
 	int			i;
 
 	i = 0;
-	printf("Philo count in create: %d\n", philo->data->philo_count);
 	if (pthread_create(&monitor, NULL, &monitor_routine, philo) != 0)
-		return (write(2, "create error\n", 13));
+		return (init_mutex_error("Creation failed\n", \
+		philo->data->philo_count, philo));
 	while (i < philo->data->philo_count)
 	{
 		if (pthread_create(&philo[i].thread, NULL, &philo_routine, \
 			&philo[i]) != 0)
-			return (write(2, "create error\n", 13));
+			return (init_mutex_error("Creation failed\n", \
+			philo->data->philo_count, philo));
 		i++;
 	}
 	i = 0;
