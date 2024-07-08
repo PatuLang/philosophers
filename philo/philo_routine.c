@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 18:52:08 by plang             #+#    #+#             */
-/*   Updated: 2024/07/08 15:40:16 by plang            ###   ########.fr       */
+/*   Updated: 2024/07/08 15:51:26 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,16 @@ int	sleep_n_think(t_philo *philo)
 
 int	murder_or_full(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->eating);
-	if (philo->data->full_philos == philo->data->philo_count)
+	if(philo->data->meal_count != -1)
 	{
+		pthread_mutex_lock(&philo->eating);
+		if (philo->data->full_philos == philo->data->philo_count)
+		{
+			pthread_mutex_unlock(&philo->eating);
+			return (1);
+		}
 		pthread_mutex_unlock(&philo->eating);
-		return (1);
 	}
-	pthread_mutex_unlock(&philo->eating);
 	pthread_mutex_lock(&philo->data->dead_lock);
 	if (philo->data->murder == 1)
 	{
