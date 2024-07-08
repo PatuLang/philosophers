@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 18:52:08 by plang             #+#    #+#             */
-/*   Updated: 2024/07/08 15:29:28 by plang            ###   ########.fr       */
+/*   Updated: 2024/07/08 15:40:16 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ int	meal_limit_set(t_philo *philo, int *i)
 			philo->data->full_philos++;
 		}
 		pthread_mutex_unlock(&philo[*i].eating);
-		if (philo->data->full_philos == philo->data->philo_count)
+		if (philo->data->full_philos == philo->data->philo_count)// murder_or_full(philo) == 0
 		{
 			pthread_mutex_lock(&philo->data->write_lock);
 			// usleep(philo->data->time_to_eat);
