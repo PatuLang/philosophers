@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:36:44 by plang             #+#    #+#             */
-/*   Updated: 2024/07/08 14:36:22 by plang            ###   ########.fr       */
+/*   Updated: 2024/07/09 19:27:48 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,12 @@ int	main(int argc, char **argv)
 		return (philo_annhilator(philo));
 	if (philo_initialization(&data, philo) != 0)
 	{
-		free_philos(philo);
-		return (philo_annhilator(philo));
+		free(philo);
+		return (1);
 	}
 	if (philo_creator(philo) != 0)
-	free_philos(philo);
+		return (1);
 	philo_annhilator(philo);
+	free(philo);
 	return (0);
 }

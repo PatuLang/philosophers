@@ -6,26 +6,24 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 17:09:01 by plang             #+#    #+#             */
-/*   Updated: 2024/07/08 14:00:54 by plang            ###   ########.fr       */
+/*   Updated: 2024/07/09 19:28:28 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	free_philos(t_philo *philo)
-{
-	int	i;
-
-	i = 0;
-	while (i < philo->data->philo_count)
-	{
-		free(&philo[i]);
-		i++;
-	}
-}
-
 int	init_mutex_error(char *str, int i, t_philo *philo)
 {
+	int	j;
+
+	j = i;
+	philo->data->murder = 1;
+	while (j != 0)
+	{
+		if (pthread_join(philo[j].thread, NULL) != 0)
+			return (write(2, "join error\n", 11));
+		j--;
+	}
 	ft_putstr_fd(str, 2);
 	if (i != 0)
 	{
@@ -38,7 +36,6 @@ int	init_mutex_error(char *str, int i, t_philo *philo)
 	}
 	pthread_mutex_destroy(&philo->data->write_lock);
 	pthread_mutex_destroy(&philo->data->dead_lock);
-	free_philos(philo);
 	return (1);
 }
 

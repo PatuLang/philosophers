@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 07:56:42 by plang             #+#    #+#             */
-/*   Updated: 2024/07/08 15:11:18 by plang            ###   ########.fr       */
+/*   Updated: 2024/07/09 19:28:15 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ void	philo_actions(t_philo *philo, char *str)
 
 	pthread_mutex_lock(&philo->data->write_lock);
 	time = get_current_time() - philo->start_time;
-	printf("%lu %d %s", time, philo->id, str);
+	if (philo->data->murder == 0 && \
+		philo->data->full_philos < philo->data->philo_count)
+		printf("%lu %d %s", time, philo->id, str);
 	pthread_mutex_unlock(&philo->data->write_lock);
 }
 
@@ -47,7 +49,7 @@ void	philo_has_died(t_philo *philo, char *str)
 	pthread_mutex_lock(&philo->data->write_lock);
 	time = get_current_time() - philo->start_time;
 	printf("%lu %d %s", time, philo->id, str);
-	// pthread_mutex_unlock(&philo->data->write_lock);
+	pthread_mutex_unlock(&philo->data->write_lock);
 }
 
 int	philos_are_full(t_philo *philo)

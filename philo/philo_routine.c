@@ -6,27 +6,11 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 18:52:08 by plang             #+#    #+#             */
-/*   Updated: 2024/07/08 15:51:26 by plang            ###   ########.fr       */
+/*   Updated: 2024/07/09 19:36:56 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-void	philo_dead_is(t_philo *philo)
-{
-	size_t	time;
-
-	pthread_mutex_lock(&philo->eating);
-	time = get_current_time() - philo->last_meal;
-	if (time >= philo->data->time_to_die)
-	{
-		pthread_mutex_lock(&philo->data->dead_lock);
-		philo->i_died = 1;
-		pthread_mutex_unlock(&philo->data->dead_lock);
-		pthread_mutex_unlock(&philo->eating);
-	}
-	pthread_mutex_unlock(&philo->eating);
-}
 
 void	fork_distribution(t_philo *philo)
 {
@@ -42,12 +26,10 @@ void	fork_distribution(t_philo *philo)
 	//     pthread_mutex_lock(&philo->right_fork);
 	//     philo_actions(philo, "has taken a r_fork\n");
 	// }
-	philo_dead_is(philo);
 }
 
 void	eat(t_philo *philo)
 {
-	philo_dead_is(philo);
 	fork_distribution(philo);
 	pthread_mutex_lock(&philo->eating);
 	philo->last_meal = get_current_time();
@@ -64,18 +46,15 @@ void	eat(t_philo *philo)
 
 int	sleep_n_think(t_philo *philo)
 {
-	philo_dead_is(philo);
 	philo_actions(philo, "is sleeping\n");
 	ft_usleep(philo->data->time_to_sleep);
-	philo_dead_is(philo);
 	philo_actions(philo, "is thinking\n");
-	philo_dead_is(philo);
 	return (0);
 }
 
 int	murder_or_full(t_philo *philo)
 {
-	if(philo->data->meal_count != -1)
+	if (philo->data->meal_count != -1)
 	{
 		pthread_mutex_lock(&philo->eating);
 		if (philo->data->full_philos == philo->data->philo_count)
@@ -105,7 +84,8 @@ void	*philo_routine(void *arg)
 		philo_actions(philo, "is thinking\n");
 		ft_usleep(philo->data->time_to_eat - 10);
 	}
-	if (philo->id == philo->data->philo_count)
+	if (philo->id == philo->data->philo_count && \
+		philo->data->philo_count % 2 != 0)
 		philo_actions(philo, "is thinking\n");
 	while (murder_or_full(philo) == 0)
 	{
@@ -126,20 +106,12 @@ int	meal_limit_set(t_philo *philo, int *i)
 			philo[*i].all_done = 1;
 			philo->data->full_philos++;
 		}
-		pthread_mutex_unlock(&philo[*i].eating);
-		if (philo->data->full_philos == philo->data->philo_count)// murder_or_full(philo) == 0
+		if (philo->data->full_philos == philo->data->philo_count)
 		{
-			pthread_mutex_lock(&philo->data->write_lock);
-			// usleep(philo->data->time_to_eat);
-			// printf("full philos: %d\n", philo->data->full_philos);
-			// int k = 0;
-			// while (k < philo->data->philo_count)
-			// {
-			// 	printf("Philo nbr: %d meals: %d\n", philo[k].id, philo[k].meals_eaten);
-			// 	k++;
-			// }
+			pthread_mutex_unlock(&philo[*i].eating);
 			return (1);
 		}
+		pthread_mutex_unlock(&philo[*i].eating);
 	}
 	if (*i < philo->data->philo_count)
 		(*i) += 1;
@@ -150,24 +122,25 @@ int	meal_limit_set(t_philo *philo, int *i)
 
 int	monitoring_i_died(t_philo *philo, int *j)
 {
-	// checking the time to die from last meal with another size_t time like in philo dead is
-	// could be faster and more accurate when we check here and not only by loocking at the
-	// flag from each philo
-	pthread_mutex_lock(&philo->data->dead_lock);
-	if (philo[*j].i_died == 1)
+	size_t	time;
+
+	pthread_mutex_lock(&philo[*j].eating);
+	time = get_current_time() - philo->last_meal;
+	if (time >= philo[*j].data->time_to_die)
 	{
-		pthread_mutex_unlock(&philo->data->dead_lock);
+		pthread_mutex_lock(&philo->data->dead_lock);
 		philo->data->murder = 1;
+		pthread_mutex_unlock(&philo->data->dead_lock);
+		pthread_mutex_unlock(&philo[*j].eating);
 		philo_has_died(&philo[*j], "died\n");
 		return (1);
 	}
-	pthread_mutex_unlock(&philo->data->dead_lock);
+	pthread_mutex_unlock(&philo[*j].eating);
 	if (*j < philo->data->philo_count)
 		(*j) += 1;
 	if (*j == philo->data->philo_count)
 		(*j) = 0;
 	return (0);
-
 }
 
 void	*monitor_routine(void *arg)
@@ -179,17 +152,10 @@ void	*monitor_routine(void *arg)
 	philo = (t_philo *)arg;
 	i = 0;
 	j = 0;
-	printf("I'm monitoring %d philosophers\n", philo->data->philo_count);
 	while (1)
 	{
 		if (monitoring_i_died(philo, &j))
 			break ;
-		// if (philo->data->murder == 1)
-		// {
-		// 	printf("Philo murder flag: %d\n", philo->data->murder);
-		// 	pthread_mutex_unlock(&philo->data->dead_lock);
-		// 	exit (1);
-		// }
 		if (philo->data->meal_count != -1)
 		{
 			if (meal_limit_set(philo, &i))
