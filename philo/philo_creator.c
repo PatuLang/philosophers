@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 14:08:00 by plang             #+#    #+#             */
-/*   Updated: 2024/07/09 18:56:21 by plang            ###   ########.fr       */
+/*   Updated: 2024/07/09 20:04:08 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ int	philo_creator(t_philo *philo)
 	}
 	i = 0;
 	if (pthread_join(monitor, NULL) != 0)
-		return (write(2, "join error\n", 11));
+		return (write(2, "Join error\n", 11));
 	while (i < philo->data->philo_count)
 	{
 		if (pthread_join(philo[i].thread, NULL) != 0)
-			return (write(2, "join error\n", 11));
+			return (write(2, "Join error\n", 11));
 		i++;
 	}
 	return (0);
