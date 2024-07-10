@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 18:52:08 by plang             #+#    #+#             */
-/*   Updated: 2024/07/10 13:59:11 by plang            ###   ########.fr       */
+/*   Updated: 2024/07/10 16:11:40 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 void	fork_distribution(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->right_fork);
-	philo_actions(philo, "has taken a r_fork\n");
+	philo_actions(philo, "has taken a fork\n");
 	if (philo->data->philo_count == 1)
 	{
 		pthread_mutex_unlock(&philo->right_fork);
 		return ;
 	}
 	pthread_mutex_lock(philo->left_fork);
-	philo_actions(philo, "has taken a l_fork\n");
+	philo_actions(philo, "has taken a fork\n");
 }
 
 void	eat(t_philo *philo)
