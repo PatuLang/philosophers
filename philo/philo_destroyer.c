@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 17:09:01 by plang             #+#    #+#             */
-/*   Updated: 2024/07/09 20:03:56 by plang            ###   ########.fr       */
+/*   Updated: 2024/07/10 14:00:44 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	init_mutex_error(char *str, int i, t_philo *philo)
 	while (j != 0)
 	{
 		if (pthread_join(philo[j].thread, NULL) != 0)
-			return (write(2, "Join error\n", 11));
+			ft_putstr_fd("Join error\n", 2);
 		j--;
 	}
 	ft_putstr_fd(str, 2);

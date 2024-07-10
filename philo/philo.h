@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:36:48 by plang             #+#    #+#             */
-/*   Updated: 2024/07/09 19:12:22 by plang            ###   ########.fr       */
+/*   Updated: 2024/07/10 14:12:14 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,23 +46,69 @@ typedef struct s_philo
 	t_data				*data;
 }	t_philo;
 
+/* ************************************************************************** */
+/*                             philo_parsing                                  */
+/* ************************************************************************** */
+
+int		input_error(char *str);
+int		input_check(int argc, char **input);
+int		digit_checker(char *str);
+
+/* ************************************************************************** */
+/*                         philo_initialization                               */
+/* ************************************************************************** */
+
+int		data_initialization(int argc, char **args, t_data *data);
+int		philo_initialization(t_data *data, t_philo *philo);
+
+/* ************************************************************************** */
+/*                             philo_creator                                  */
+/* ************************************************************************** */
+
+int		philo_creator(t_philo *philo);
+
+/* ************************************************************************** */
+/*                             philo_routine                                  */
+/* ************************************************************************** */
+
+void	fork_distribution(t_philo *philo);
+void	eat(t_philo *philo);
+int		sleep_n_think(t_philo *philo);
+void	*philo_routine(void *arg);
+
+/* ************************************************************************** */
+/*                         philo_monitor_routine                              */
+/* ************************************************************************** */
+
+void	*monitor_routine(void *arg);
+int		murder_or_full(t_philo *philo);
+int		monitoring_i_died(t_philo *philo, int *j);
+int		meal_limit_set(t_philo *philo, int *i);
+
+/* ************************************************************************** */
+/*                          philo_destroyer.c                                 */
+/* ************************************************************************** */
+
+int		init_mutex_error(char *str, int i, t_philo *philo);
+int		data_mutex_error(char *str, t_data *data);
+int		philo_annhilator(t_philo *philo);
+
+/* ************************************************************************** */
+/*                             philo_utils1                                   */
+/* ************************************************************************** */
+
+size_t	get_current_time(void);
+void	ft_usleep(size_t time_ms);
+void	philo_actions(t_philo *philo, char *str);
+void	philo_has_died(t_philo *philo, char *str);
+int		philos_are_full(t_philo *philo);
+
+/* ************************************************************************** */
+/*                             philo_utils2                                   */
+/* ************************************************************************** */
+
 int		ft_atoi(const char *str);
 int		ft_isdigit(int c);
 void	ft_putstr_fd(char *s, int fd);
-int		input_error(char *str);
-int		input_check(int argc, char **input);
-int		data_initialization(int argc, char **args, t_data *data);
-int		philo_initialization(t_data *data, t_philo *philo);
-int		init_mutex_error(char *str, int i, t_philo *philo);
-int		data_mutex_error(char *str, t_data *data);
-size_t	get_current_time(void);
-void	ft_usleep(size_t time_ms);
-int		philo_creator(t_philo *philo);
-void	*philo_routine(void *arg);
-void	*monitor_routine(void *arg);
-void	philo_actions(t_philo *philo, char *str);
-int		philos_are_full(t_philo *philo);
-int		philo_annhilator(t_philo *philo);
-void	philo_has_died(t_philo *philo, char *str);
 
 #endif
