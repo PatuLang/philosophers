@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 18:52:08 by plang             #+#    #+#             */
-/*   Updated: 2024/07/10 16:11:40 by plang            ###   ########.fr       */
+/*   Updated: 2024/07/11 13:29:58 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	eat(t_philo *philo)
 	philo->last_meal = get_current_time();
 	pthread_mutex_unlock(&philo->eating);
 	philo_actions(philo, "is eating\n");
-	ft_usleep(philo->data->time_to_eat);
+	ft_usleep(philo->data->time_to_eat, philo);
 	philo->meals_eaten++;
 	pthread_mutex_unlock(&philo->right_fork);
 	pthread_mutex_unlock(philo->left_fork);
@@ -43,7 +43,7 @@ void	eat(t_philo *philo)
 int	sleep_n_think(t_philo *philo)
 {
 	philo_actions(philo, "is sleeping\n");
-	ft_usleep(philo->data->time_to_sleep);
+	ft_usleep(philo->data->time_to_sleep, philo);
 	philo_actions(philo, "is thinking\n");
 	return (0);
 }
@@ -56,7 +56,7 @@ void	*philo_routine(void *arg)
 	if (philo->id % 2 == 0)
 	{
 		philo_actions(philo, "is thinking\n");
-		ft_usleep(philo->data->time_to_eat - 10);
+		ft_usleep(philo->data->time_to_eat - 10, philo);
 	}
 	if (philo->id == philo->data->philo_count && \
 		philo->data->philo_count % 2 != 0)

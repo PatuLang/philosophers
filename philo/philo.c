@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:36:44 by plang             #+#    #+#             */
-/*   Updated: 2024/07/10 14:14:42 by plang            ###   ########.fr       */
+/*   Updated: 2024/07/11 12:20:36 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ int	main(int argc, char **argv)
 	t_philo	*philo;
 
 	if (argc < 5 || argc > 6)
-	{
 		return (input_error("Not the correct amount of arguments\n"));
-	}
 	if (input_check(argc, argv) != 0)
 		return (1);
 	if (data_initialization(argc, argv, &data) != 0)
@@ -34,7 +32,10 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	if (philo_creator(philo) != 0)
+	{
+		free(philo);
 		return (1);
+	}
 	philo_annhilator(philo);
 	free(philo);
 	return (0);

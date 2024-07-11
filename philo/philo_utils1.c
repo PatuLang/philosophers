@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 07:56:42 by plang             #+#    #+#             */
-/*   Updated: 2024/07/10 13:45:02 by plang            ###   ########.fr       */
+/*   Updated: 2024/07/11 13:42:54 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,14 @@ size_t	get_current_time(void)
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
-void	ft_usleep(size_t time_ms)
+void	ft_usleep(size_t time_ms, t_philo *philo)
 {
 	size_t	start;
+	size_t	dead;
 
+	dead = philo->last_meal + philo->data->time_to_die;
 	start = get_current_time();
-	while ((get_current_time() - start) < time_ms)
+	while ((get_current_time() - start) < time_ms && get_current_time() < dead)
 		usleep(500);
 }
 

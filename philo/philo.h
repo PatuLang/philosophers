@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:36:48 by plang             #+#    #+#             */
-/*   Updated: 2024/07/10 14:12:14 by plang            ###   ########.fr       */
+/*   Updated: 2024/07/11 13:32:18 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_philo
 int		input_error(char *str);
 int		input_check(int argc, char **input);
 int		digit_checker(char *str);
+int		checking_max_int(char **input);
 
 /* ************************************************************************** */
 /*                         philo_initialization                               */
@@ -89,16 +90,18 @@ int		meal_limit_set(t_philo *philo, int *i);
 /*                          philo_destroyer.c                                 */
 /* ************************************************************************** */
 
-int		init_mutex_error(char *str, int i, t_philo *philo);
-int		data_mutex_error(char *str, t_data *data);
+int		init_mutex_error(char *str, int i, t_philo *philo, int which);
+int		data_mutex_error(char *str, t_data *data, int which);
 int		philo_annhilator(t_philo *philo);
+int		create_philo_error(char *str, int i, t_philo *philo);
+int		join_philo_error(t_philo *philo, char *str);
 
 /* ************************************************************************** */
 /*                             philo_utils1                                   */
 /* ************************************************************************** */
 
 size_t	get_current_time(void);
-void	ft_usleep(size_t time_ms);
+void	ft_usleep(size_t time_ms, t_philo *philo);
 void	philo_actions(t_philo *philo, char *str);
 void	philo_has_died(t_philo *philo, char *str);
 int		philos_are_full(t_philo *philo);
