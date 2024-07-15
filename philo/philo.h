@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:36:48 by plang             #+#    #+#             */
-/*   Updated: 2024/07/11 13:32:18 by plang            ###   ########.fr       */
+/*   Updated: 2024/07/15 16:51:45 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int		meal_limit_set(t_philo *philo, int *i);
 
 int		init_mutex_error(char *str, int i, t_philo *philo, int which);
 int		data_mutex_error(char *str, t_data *data, int which);
-int		philo_annhilator(t_philo *philo);
+int		philo_annhilator(t_philo *philo, int i);
 int		create_philo_error(char *str, int i, t_philo *philo);
 int		join_philo_error(t_philo *philo, char *str);
 

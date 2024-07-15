@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 17:09:01 by plang             #+#    #+#             */
-/*   Updated: 2024/07/11 14:01:20 by plang            ###   ########.fr       */
+/*   Updated: 2024/07/15 16:51:33 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,8 @@ int	data_mutex_error(char *str, t_data *data, int which)
 	return (1);
 }
 
-int	philo_annhilator(t_philo *philo)
+int	philo_annhilator(t_philo *philo, int i)
 {
-	int	i;
-
-	i = 0;
 	while (i < philo->data->philo_count)
 	{
 		pthread_mutex_destroy(&philo[i].eating);

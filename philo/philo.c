@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 12:36:44 by plang             #+#    #+#             */
-/*   Updated: 2024/07/11 12:20:36 by plang            ###   ########.fr       */
+/*   Updated: 2024/07/15 16:53:00 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char **argv)
 		return (1);
 	philo = malloc(data.philo_count * sizeof(t_philo));
 	if (!philo)
-		return (philo_annhilator(philo));
+		return (philo_annhilator(philo, data.philo_count));
 	if (philo_initialization(&data, philo) != 0)
 	{
 		free(philo);
@@ -36,7 +36,7 @@ int	main(int argc, char **argv)
 		free(philo);
 		return (1);
 	}
-	philo_annhilator(philo);
+	philo_annhilator(philo, 0);
 	free(philo);
 	return (0);
 }
