@@ -6,7 +6,7 @@
 /*   By: plang <plang@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:50:55 by plang             #+#    #+#             */
-/*   Updated: 2024/07/11 17:10:56 by plang            ###   ########.fr       */
+/*   Updated: 2024/07/15 11:44:45 by plang            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	checking_max_int(char **input)
 	max = 2147483647;
 	while (input[i])
 	{
-		check = atoi(input[i]);
+		check = ft_atoi(input[i]);
 		if (check < 0)
 			return (1);
 		if (check > max)
